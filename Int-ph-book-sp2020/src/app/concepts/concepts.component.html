@@ -1,0 +1,90 @@
+<div class="container-fluid">
+    <p>Data received from Child Comp:  {{profileName}} </p>
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" data-toggle="tab" href="#basic-databinding" role="tab"
+          aria-controls="basic-databinding" aria-selected="true">Basic Data Binding</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#cpb-tab" role="tab" aria-controls="cpb-tab"
+          aria-selected="false">Custom Prop Binding</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#ceb-tab" role="tab" aria-controls="ceb-tab"
+          aria-selected="false">Child to Parent Comp Communication</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#directives-tab" role="tab" aria-controls="directives-tab"
+          aria-selected="false">Directives</a>
+      </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+  
+      <div class="tab-pane fade show active" id="basic-databinding" role="tabpanel"
+        aria-labelledby="basic-databinding-tab">
+        <h2>Basic Data Binding</h2>  <br> <br> <br>
+
+        <!-- INTERPOLATION --> <h5>INTERPOLATION</h5>
+        <h6>  {{appName}}  </h6>   <hr>
+
+        <!-- PROPERTY BINDING --> <h5>PROPERTY BINDING</h5>
+        <!-- <h6 [innerHTML] = "propertyBinding"> </h6>               <<<<< ---------------------- -->
+        <p [innerHTML]="propertyBinding"> </p> <hr>
+
+
+        <!-- EVENT BINDING --> <h5>EVENT BINDING</h5>
+        <button (click) ="showdata()" class="btn btn-danger  active"  >Event Binding Example</button>
+                <!-- todo -->
+        <button (click)="todoTask( )"  id="eventTodo"  class="btn btn-success active"  > Event Todo Example</button> <hr>
+                
+
+
+        <!-- TWO WAY BINDING              -->
+        <h5>TWO WAY BINDING </h5>
+        <input type="text" [(ngModel)]="courseName">
+        {{courseName}}
+
+      </div>
+  
+      <div class="tab-pane fade" id="cpb-tab" role="tabpanel" aria-labelledby="cpb-tab-tab">
+        <h2>Custom Property Binding -- Parent to Child Comp Communication</h2>
+        
+        <app-cpb></app-cpb>
+        <app-cpb [age]='32' ></app-cpb>
+      </div>
+  
+      <div class="tab-pane fade" id="ceb-tab" role="tabpanel" aria-labelledby="ceb-tab-tab">
+        <h2>Child to Parent Comp Communication</h2>
+        <app-ceb  (profileLoad) = 'profileLoadHandler($event)' ></app-ceb>
+
+      </div>
+  
+      <div class="tab-pane fade" id="directives-tab" role="tabpanel" aria-labelledby="directives-tab">
+        <h2>Directives</h2>
+
+        <h6> Structural Directive</h6>
+        <!-- NGIF -->
+        <div  class="alert alert-success col-md-3"  (click)= " this.logdata = !this.logdata " >  LoggedIn   </div> <br>
+        <button class="btn btn-dark"   *ngIf = "logdata ; else elseblock"  (click)=" this.logdata = !this.logdata ; " >Wanna LogOut?</button>
+        <!-- <button class="btn btn-"   *ngIf = "logdata ; else elseblock"  (click)=" this.logdata = !this.logdata ; " >Wanna LogOut?</button> -->
+        <ng-template #elseblock>
+          <div class="btn btn-danger">
+                  Logged Out!
+          </div> <br> <br>
+        </ng-template>
+ <!-- *ngIf = "logdata "  -->
+        <!-- NG_FOR -->
+            <ul>
+              <li *ngFor="let s of skill ; let i=index" > {{i}} -> {{s}} </li>
+            </ul>
+        
+        <!-- NG SWITCH  -->
+            <div *ngFor="let s of skill">
+               <div [ngSwitch]="s">
+                  <div *ngSwitchCase = "'html'"> ok. html is selected </div>
+                  <div *ngSwitchCase = "'css'"> ok. you know css as well? </div>
+                  <div *ngSwitchCase = "'js'">  js is love </div>
+               </div> 
+           </div>
+
+      </div>
+  
+  
+    </div>
+  </div>
+  
+  
